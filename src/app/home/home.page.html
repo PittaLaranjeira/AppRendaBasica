@@ -1,20 +1,44 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      APP - IBGE - Renda Básica
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <form #formulario="ngForm">
+    <br>
+    <ion-item>
+      <ion-label position="floating">Renda familiar: </ion-label>
+      <ion-input name="renfa" ngModel></ion-input>
+    </ion-item><br>
+    <ion-item>
+      <ion-label position="floating">Numero pessoas: </ion-label>
+      <ion-input name="numpe" ngModel></ion-input>
+    </ion-item><br>
+    <ion-item>
+      <ion-label>Tipo Residencia: </ion-label>
+      <select name="tpres" id="tpres" ngModel>
+        <option value="P">Propria</option>
+        <option value="A">Alugada</option>
+      </select>
+    </ion-item><br>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <ion-button (click)="coldados(formulario); this.formulario.reset()">Coletar Dados</ion-button>
+    <ion-button id="click-trigger">Emitir Relatório</ion-button>
+    <ion-popover trigger="click-trigger" triggerAction="click">
+      <ng-template>
+        <ion-content class="ion-padding">
+          média de renda familiar: {{mediafinal}}<p>
+          total de residentes: {{numpessoas}}<p>
+          qtde residências: {{residencias}}<p>
+          residencias próprias: {{resproprias}}<p>
+          percentual residencias próprias: {{(resproprias*100)/residencias}}%<p>
+          residencias alugadas: {{resalugadas}}<p>
+          percentual residencias alugadas: {{(resalugadas*100)/residencias}}%<p>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+  </form>
 </ion-content>
